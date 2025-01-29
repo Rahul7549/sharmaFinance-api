@@ -8,6 +8,7 @@ public class SharmaFinanceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SharmaFinanceApplication.class, args);
+		System.out.println("#######@@@@@@@@@@@@@@@@@@@@@***************###############");
 	}
 
 }
