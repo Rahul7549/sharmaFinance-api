@@ -35,8 +35,18 @@ public class Loan {
 
     @Column(name = "updated_on")
     private LocalDateTime updatedOn;
+    
+    public Loan() {}
 
-    // Getters and Setters
+    public Loan(int memberId, BigDecimal loanAmount, BigDecimal interestRate, BigDecimal loanBalance, 
+    		String   loanStatus) {
+        this.loanId = memberId;
+        this.loanAmount = loanAmount;
+        this.interestRate = interestRate;
+        this.loanBalance = loanBalance;
+        this.loanStatus = loanStatus;
+    }
+	// Getters and Setters
     public int getLoanId() {
         return loanId;
     }
@@ -100,4 +110,13 @@ public class Loan {
     public void setUpdatedOn(LocalDateTime updatedOn) {
         this.updatedOn = updatedOn;
     }
+
+	@Override
+	public String toString() {
+		return "Loan [loanId=" + loanId + ", member=" + member + ", loanAmount=" + loanAmount + ", interestRate="
+				+ interestRate + ", loanBalance=" + loanBalance + ", loanStatus=" + loanStatus + ", createdOn="
+				+ createdOn + ", updatedOn=" + updatedOn + "]";
+	}
+    
+    
 }

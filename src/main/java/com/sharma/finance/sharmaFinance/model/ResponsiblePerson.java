@@ -26,8 +26,17 @@ public class ResponsiblePerson {
 
     @Column(name = "updated_on")
     private LocalDateTime updatedOn;
+    
+    public ResponsiblePerson() {}
 
-    // Getters and Setters
+    public ResponsiblePerson(int responsibleId, String name, String contactInfo) {
+        this.responsibleId = responsibleId;
+        this.name = name;
+        this.contactInfo = contactInfo;
+    }
+
+
+	// Getters and Setters
     public int getResponsibleId() {
         return responsibleId;
     }
@@ -67,5 +76,13 @@ public class ResponsiblePerson {
     public void setUpdatedOn(LocalDateTime updatedOn) {
         this.updatedOn = updatedOn;
     }
+
+	@Override
+	public String toString() {
+		return "ResponsiblePerson [responsibleId=" + responsibleId + ", name=" + name + ", contactInfo=" + contactInfo
+				+ ", createdOn=" + createdOn + ", updatedOn=" + updatedOn + "]";
+	}
+    
+    
 }
 

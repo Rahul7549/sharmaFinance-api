@@ -35,7 +35,16 @@ public class Payment {
     @Column(name = "updated_on")
     private LocalDate updatedOn;
 
-    // Getters and Setters
+    public Payment() {}
+    
+    public Payment(int memberId, LocalDate paymentDate, BigDecimal amountPaid, BigDecimal fine) {
+        this.paymentId = memberId;
+        this.paymentDate = paymentDate;
+        this.amountPaid = amountPaid;
+        this.fine = fine;
+    }
+
+	// Getters and Setters
     public int getPaymentId() {
         return paymentId;
     }
@@ -91,4 +100,13 @@ public class Payment {
     public void setUpdatedOn(LocalDate updatedOn) {
         this.updatedOn = updatedOn;
     }
+
+	@Override
+	public String toString() {
+		return "Payment [paymentId=" + paymentId + ", member=" + member + ", paymentDate=" + paymentDate
+				+ ", amountPaid=" + amountPaid + ", fine=" + fine + ", createdOn=" + createdOn + ", updatedOn="
+				+ updatedOn + "]";
+	}
+    
+    
 }

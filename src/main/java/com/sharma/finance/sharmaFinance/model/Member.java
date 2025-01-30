@@ -36,8 +36,18 @@ public class Member {
 
     @Column(name = "updated_on")
     private LocalDateTime updatedOn;
+    
+    public Member() {}
 
-    // Getters and Setters
+	public Member(int memberId, String name, String contactInfo, /* int responsibleId, */ String status) {
+        this.memberId = memberId;
+        this.name = name;
+        this.contactInfo = contactInfo;
+        //this.responsibleId = responsibleId;
+        this.status = status;
+    }
+
+	// Getters and Setters
     public int getMemberId() {
         return memberId;
     }
@@ -93,4 +103,13 @@ public class Member {
     public void setUpdatedOn(LocalDateTime updatedOn) {
         this.updatedOn = updatedOn;
     }
+
+	@Override
+	public String toString() {
+		return "Member [memberId=" + memberId + ", name=" + name + ", contactInfo=" + contactInfo
+				+ ", responsiblePerson=" + responsiblePerson + ", status=" + status + ", createdOn=" + createdOn
+				+ ", updatedOn=" + updatedOn + "]";
+	}
+    
+    
 }
