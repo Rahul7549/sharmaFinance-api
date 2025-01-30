@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sharma.finance.sharmaFinance.model.ResponsiblePerson;
+import com.sharma.finance.sharmaFinance.repository.ResponsiblePersonRepository;
 
 @Service
 public class ResponsiblePersonService {
@@ -17,6 +18,12 @@ public class ResponsiblePersonService {
         responsiblePersons.add(new ResponsiblePerson(102, "Bob", "bob@example.com"));
     }
 	
+	@Autowired
+	ResponsiblePersonRepository responsiblePersonRepository;
 	
+	public List<ResponsiblePerson> findAllResponsiblePersons(){
+		var responsiblePersons=responsiblePersonRepository.findAll();
+		return responsiblePersons;
+	}
 
 }
