@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sharma.finance.sharmaFinance.model.Loan;
+import com.sharma.finance.sharmaFinance.repository.LoanRepository;
 
 @Service
 public class LoanService {
@@ -21,5 +22,13 @@ public class LoanService {
   
     }
     
+    @Autowired
+    LoanRepository loanRepository;
+    
+    public List<Loan> findAllLoan(){
+    	var  loans=loanRepository.findAll();
+    	
+    	return loans;
+    }
 	
 }

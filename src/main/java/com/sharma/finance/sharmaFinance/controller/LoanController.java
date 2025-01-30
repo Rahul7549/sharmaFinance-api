@@ -6,18 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sharma.finance.sharmaFinance.model.Payment;
-import com.sharma.finance.sharmaFinance.service.PaymentService;
+import com.sharma.finance.sharmaFinance.model.Loan;
+import com.sharma.finance.sharmaFinance.service.LoanService;
 
 @RestController
-public class PaymentController {
+public class LoanController {
 
 	@Autowired
-	PaymentService paymentService;
+	LoanService loanService;
 	
-	@GetMapping("/payments")
-	public List<Payment> findAllPayment(){
-		return paymentService.findAllPayment();
+	@GetMapping("/loan")
+	public List<Loan> findAllLoan(){
+		return loanService.findAllLoan();
 	}
-	
 }
