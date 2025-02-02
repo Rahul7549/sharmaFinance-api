@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity(name = "loan_payments")
 public class LoanPayment {
@@ -29,10 +30,10 @@ public class LoanPayment {
     private BigDecimal remainingBalance;
 
     @Column(name = "created_on", updatable = false)
-    private LocalDate createdOn;
+    private LocalDateTime createdOn;
 
     @Column(name = "updated_on")
-    private LocalDate updatedOn;
+    private LocalDateTime updatedOn;
     
     public LoanPayment() {}
 
@@ -42,7 +43,7 @@ public class LoanPayment {
         this.amountPaid = amountPaid;
         this.remainingBalance = remainingBalance;
     }
-
+ 
 	// Getters and Setters
     public int getPaymentId() {
         return paymentId;
@@ -84,21 +85,34 @@ public class LoanPayment {
         this.remainingBalance = remainingBalance;
     }
 
-    public LocalDate getCreatedOn() {
+    public LocalDateTime getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(LocalDate createdOn) {
+    public void setCreatedOn(LocalDateTime createdOn) {
         this.createdOn = createdOn;
     }
 
-    public LocalDate getUpdatedOn() {
+    public LocalDateTime getUpdatedOn() {
         return updatedOn;
     }
 
-    public void setUpdatedOn(LocalDate updatedOn) {
+    public void setUpdatedOn(LocalDateTime updatedOn) {
         this.updatedOn = updatedOn;
     }
+    
+    
+    @PrePersist
+    protected void onCreate() {
+        this.createdOn = LocalDateTime.now();
+        this.updatedOn = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedOn = LocalDateTime.now();
+    }
+    
 
 	@Override
 	public String toString() {

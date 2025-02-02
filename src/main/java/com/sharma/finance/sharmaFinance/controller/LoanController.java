@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sharma.finance.sharmaFinance.model.Loan;
 import com.sharma.finance.sharmaFinance.service.LoanService;
 
-@RestController
+@RestController()
 public class LoanController {
 
 	@Autowired
