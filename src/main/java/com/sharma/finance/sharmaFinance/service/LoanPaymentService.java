@@ -114,7 +114,7 @@ public class LoanPaymentService {
 	@Transactional
     public void deleteLoanPayment(Long paymentId) {
         LoanPayment existingPayment = loanPaymentRepository.findById(paymentId)
-                .orElseThrow(() -> new ResourceNotFoundException("LoanPayment not found with ID: " + paymentId));
+                .orElseThrow(() -> new ResourceNotFoundException("LoanPayment not found with ID: " + 				paymentId));
 
         loanPaymentRepository.delete(existingPayment);
         

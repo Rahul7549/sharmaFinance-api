@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.sharma.finance.sharmaFinance.model.Loan;
 
 @Repository
-public interface LoanRepository extends JpaRepository<Loan, Integer> {
+public interface LoanRepository extends JpaRepository<Loan, Long> {
 
 }
