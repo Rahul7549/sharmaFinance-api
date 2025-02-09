@@ -53,9 +53,9 @@ public class LoanPayment {
         this.paymentId = paymentId;
     }
 
-    public Loan getLoan() {
-        return loan;
-    }
+//    public Loan getLoan() {
+//        return loan;
+//    }
 
     public void setLoan(Loan loan) {
         this.loan = loan;

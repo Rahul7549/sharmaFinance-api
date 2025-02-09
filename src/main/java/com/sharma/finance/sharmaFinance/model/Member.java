@@ -1,5 +1,6 @@
 package com.sharma.finance.sharmaFinance.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,8 +8,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity(name = "members")
 public class Member {
@@ -37,15 +42,20 @@ public class Member {
     @Column(name = "updated_on")
     private LocalDateTime updatedOn;
     
+    
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Loan> loans;
+    
+    
     public Member() {}
 
-	public Member(int memberId, String name, String contactInfo, /* int responsibleId, */ String status) {
-        this.memberId = memberId;
-        this.name = name;
-        this.contactInfo = contactInfo;
-        //this.responsibleId = responsibleId;
-        this.status = status;
-    }
+//	public Member(int memberId, String name, String contactInfo, /* int responsibleId, */ String status) {
+//        this.memberId = memberId;
+//        this.name = name;
+//        this.contactInfo = contactInfo;
+//        //this.responsibleId = responsibleId;
+//        this.status = status;
+//    }
 
 	// Getters and Setters
     public int getMemberId() {
@@ -103,13 +113,37 @@ public class Member {
     public void setUpdatedOn(LocalDateTime updatedOn) {
         this.updatedOn = updatedOn;
     }
+    
+    
+    
+    public List<Loan> getLoans() {
+		return loans;
+	}
+
+	public void setLoans(List<Loan> loans) {
+		this.loans = loans;
+	}
+
+	@PrePersist
+    protected void onCreate() {
+        this.createdOn = LocalDateTime.now();
+        this.updatedOn = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedOn = LocalDateTime.now();
+    }
 
 	@Override
 	public String toString() {
 		return "Member [memberId=" + memberId + ", name=" + name + ", contactInfo=" + contactInfo
 				+ ", responsiblePerson=" + responsiblePerson + ", status=" + status + ", createdOn=" + createdOn
-				+ ", updatedOn=" + updatedOn + "]";
+				+ ", updatedOn=" + updatedOn + ", loans=" + loans + "]";
 	}
+    
+
+	
     
     
 }

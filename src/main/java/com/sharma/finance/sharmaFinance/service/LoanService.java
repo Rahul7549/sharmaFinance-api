@@ -112,10 +112,10 @@ public class LoanService {
     @Transactional
     public ResponseEntity<?> deleteLoan(long loanId){
     	try {
-			Loan exixtingLoan=loanRepository.findById(loanId)
+			Loan existingLoan=loanRepository.findById(loanId)
 				.orElseThrow(()-> new ResourceNotFoundException("Loan not found with ID:" + 				loanId));
 			
-			loanRepository.delete(exixtingLoan);
+			loanRepository.delete(existingLoan);
 			logger.info("Loan deleted successfully with ID ",+loanId);
 			return ResponseEntity.ok("Loan deleted successfully");
 		} catch (Exception e) {
