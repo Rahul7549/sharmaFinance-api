@@ -7,6 +7,6 @@ import com.sharma.finance.sharmaFinance.model.Payment;
 
 
 @Repository
-public interface PaymentRepository extends JpaRepository<Payment,Integer>{
+public interface PaymentRepository extends JpaRepository<Payment,Long>{
 
 }

@@ -57,9 +57,9 @@ public class Payment {
 //        return member;
 //    }
 //
-//    public void setMember(Member member) {
-//        this.member = member;
-//    }
+    public void setMember(Member member) {
+        this.member = member;
+    }
 
     public LocalDate getPaymentDate() {
         return paymentDate;
@@ -107,6 +107,7 @@ public class Payment {
 				+ ", amountPaid=" + amountPaid + ", fine=" + fine + ", createdOn=" + createdOn + ", updatedOn="
 				+ updatedOn + "]";
 	}
-    
+
+	
     
 }
