@@ -3,9 +3,9 @@ package com.sharma.finance.sharmaFinance.model;
 //import javax.persistence.*;
 
 import jakarta.persistence.*;
-import jakarta.persistence.GenerationType;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity(name = "responsible_persons")
 public class ResponsiblePerson {
@@ -26,6 +26,11 @@ public class ResponsiblePerson {
 
     @Column(name = "updated_on")
     private LocalDateTime updatedOn;
+    
+    //@OneToMany
+    //@JoinColumn(name = "member_id", referencedColumnName = "member_id", nullable = false)
+    @OneToMany(mappedBy = "memberId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Member> members;
     
     public ResponsiblePerson() {}
 
@@ -76,13 +81,21 @@ public class ResponsiblePerson {
     public void setUpdatedOn(LocalDateTime updatedOn) {
         this.updatedOn = updatedOn;
     }
+    
+
+	public List<Member> getMembers() {
+		return members;
+	}
+
+//	public void setMembers(List<Member> members) {
+//		this.members = members;
+//	}
 
 	@Override
 	public String toString() {
 		return "ResponsiblePerson [responsibleId=" + responsibleId + ", name=" + name + ", contactInfo=" + contactInfo
-				+ ", createdOn=" + createdOn + ", updatedOn=" + updatedOn + "]";
+				+ ", createdOn=" + createdOn + ", updatedOn=" + updatedOn + ", members=" + members + "]";
 	}
-    
     
 }
 

@@ -3,8 +3,9 @@ package com.sharma.finance.sharmaFinance.model;
 //import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import org.springframework.context.annotation.ComponentScan;
+import java.time.LocalDateTime;
 
+import org.springframework.context.annotation.ComponentScan;
 import jakarta.persistence.*;
 
 @ComponentScan
@@ -30,10 +31,10 @@ public class Payment {
     private BigDecimal fine = BigDecimal.ZERO;
 
     @Column(name = "created_on", updatable = false)
-    private LocalDate createdOn;
+    private LocalDateTime createdOn;
 
     @Column(name = "updated_on")
-    private LocalDate updatedOn;
+    private LocalDateTime updatedOn;
 
     public Payment() {}
     
@@ -85,29 +86,37 @@ public class Payment {
         this.fine = fine;
     }
 
-    public LocalDate getCreatedOn() {
+    public LocalDateTime getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(LocalDate createdOn) {
+    public void setCreatedOn(LocalDateTime createdOn) {
         this.createdOn = createdOn;
     }
 
-    public LocalDate getUpdatedOn() {
+    public LocalDateTime getUpdatedOn() {
         return updatedOn;
     }
 
-    public void setUpdatedOn(LocalDate updatedOn) {
+    public void setUpdatedOn(LocalDateTime updatedOn) {
         this.updatedOn = updatedOn;
     }
 
+    @PrePersist
+    protected void onCreate() {
+        this.createdOn = LocalDateTime.now();
+        this.updatedOn = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedOn = LocalDateTime.now();
+    }
+    
 	@Override
 	public String toString() {
 		return "Payment [paymentId=" + paymentId + ", member=" + member + ", paymentDate=" + paymentDate
 				+ ", amountPaid=" + amountPaid + ", fine=" + fine + ", createdOn=" + createdOn + ", updatedOn="
 				+ updatedOn + "]";
 	}
-
-	
-    
 }
