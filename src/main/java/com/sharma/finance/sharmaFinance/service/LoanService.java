@@ -31,13 +31,13 @@ public class LoanService {
 	private static List<Loan> loans = new ArrayList<>();
 	private static final Logger logger = LoggerFactory.getLogger(LoanPaymentService.class);
 	
-    static {
-    	loans.add(new Loan(1,  new BigDecimal("5000.00"), new BigDecimal("5.0"), 
-    			new BigDecimal("4500.00"), "Approved"));
-        loans.add(new Loan(2, new BigDecimal("2000.00"), new BigDecimal("3.0"), 
-        		new BigDecimal("1900.00"), "Pending"));
-  
-    }
+//    static {
+//    	loans.add(new Loan(1,  new BigDecimal("5000.00"), new BigDecimal("5.0"),
+//    			new BigDecimal("4500.00"), "Approved"));
+//        loans.add(new Loan(2, new BigDecimal("2000.00"), new BigDecimal("3.0"),
+//        		new BigDecimal("1900.00"), "Pending"));
+//
+//    }
     
     @Autowired
     LoanRepository loanRepository;
@@ -73,12 +73,12 @@ public class LoanService {
     public ResponseEntity<?> createNewLoan(Loan newLoan){
     	try {
     		
-    		Member member = memberRepository.findById(newLoan.getMember().getMemberId())
-    		        .orElseThrow(() -> new ResourceNotFoundException("Member not found with ID " + 					newLoan.getMember().getMemberId()));
-    		
-    		logger.info(member.toString());
-    		//logger.info(member.);
-    		newLoan.setMember(member);
+//    		Member member = memberRepository.findById(newLoan.getMember().getMemberId())
+//    		        .orElseThrow(() -> new ResourceNotFoundException("Member not found with ID " + 					newLoan.getMember().getMemberId()));
+//    		
+//    		logger.info(member.toString());
+//    		//logger.info(member.);
+//    		newLoan.setMember(member);
     		Loan  createdLoan=loanRepository.save(newLoan);
     		return ResponseEntity.status(HttpStatus.CREATED).body(createdLoan);
 		} catch (Exception e) {
@@ -98,7 +98,7 @@ public class LoanService {
 			existingLoan.setLoanAmount(newLoan.getLoanAmount());
 			existingLoan.setLoanBalance(newLoan.getLoanBalance());
 			existingLoan.setLoanStatus(newLoan.getLoanStatus());
-			//existingLoan.set
+			existingLoan.setInterestRate(newLoan.getInterestRate());
 			Loan updatedLoan=loanRepository.save(existingLoan);
 			logger.info("Loan updated uuccessfully with ID" +loanId);
 			return ResponseEntity.ok(updatedLoan);

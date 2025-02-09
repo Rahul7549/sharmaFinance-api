@@ -3,6 +3,7 @@ package com.sharma.finance.sharmaFinance.model;
 //import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -14,9 +15,12 @@ public class Loan {
     @Column(name = "loan_id")
     private int loanId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", referencedColumnName = "member_id", nullable = false)
     private Member member;
+
+    @OneToMany(mappedBy = "loan", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<LoanPayment> loanPayments;
 
     @Column(name = "loan_amount", nullable = false, precision = 10, scale = 2)
     private BigDecimal loanAmount;
@@ -38,14 +42,14 @@ public class Loan {
     
     public Loan() {}
 
-    public Loan(int memberId, BigDecimal loanAmount, BigDecimal interestRate, BigDecimal loanBalance, 
-    		String   loanStatus) {
-        this.loanId = memberId;
-        this.loanAmount = loanAmount;
-        this.interestRate = interestRate;
-        this.loanBalance = loanBalance;
-        this.loanStatus = loanStatus;
-    }
+//    public Loan(int memberId, BigDecimal loanAmount, BigDecimal interestRate, BigDecimal loanBalance,
+//    		String   loanStatus) {
+//        //this.loanId = memberId;
+//        this.loanAmount = loanAmount;
+//        this.interestRate = interestRate;
+//        this.loanBalance = loanBalance;
+//        this.loanStatus = loanStatus;
+//    }
 	// Getters and Setters
     public int getLoanId() {
         return loanId;
@@ -55,9 +59,9 @@ public class Loan {
         this.loanId = loanId;
     }
 
-    public Member getMember() {
-        return member;
-    }
+//    public Member getMember() {
+//        return member;
+//    }
 
     public void setMember(Member member) {
         this.member = member;
@@ -111,12 +115,38 @@ public class Loan {
         this.updatedOn = updatedOn;
     }
 
-	@Override
-	public String toString() {
-		return "Loan [loanId=" + loanId + ", member=" + member + ", loanAmount=" + loanAmount + ", interestRate="
-				+ interestRate + ", loanBalance=" + loanBalance + ", loanStatus=" + loanStatus + ", createdOn="
-				+ createdOn + ", updatedOn=" + updatedOn + "]";
-	}
-    
-    
+    public List<LoanPayment> getLoanPayments() {
+        return loanPayments;
+    }
+
+    public void setLoanPayments(List<LoanPayment> loanPayments) {
+        this.loanPayments = loanPayments;
+    }
+
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdOn = LocalDateTime.now();
+        this.updatedOn = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedOn = LocalDateTime.now();
+    }
+
+    @Override
+    public String toString() {
+        return "Loan{" +
+                "loanId=" + loanId +
+                ", member=" + member +
+                ", loanPayments=" + loanPayments +
+                ", loanAmount=" + loanAmount +
+                ", interestRate=" + interestRate +
+                ", loanBalance=" + loanBalance +
+                ", loanStatus='" + loanStatus + '\'' +
+                ", createdOn=" + createdOn +
+                ", updatedOn=" + updatedOn +
+                '}';
+    }
 }

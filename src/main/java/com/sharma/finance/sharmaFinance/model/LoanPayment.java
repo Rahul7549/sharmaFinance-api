@@ -16,7 +16,7 @@ public class LoanPayment {
     @Column(name = "payment_id")
     private int paymentId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "loan_id", referencedColumnName = "loan_id", nullable = false)
     private Loan loan;
 
@@ -100,6 +100,8 @@ public class LoanPayment {
     public void setUpdatedOn(LocalDateTime updatedOn) {
         this.updatedOn = updatedOn;
     }
+
+
     
     
     @PrePersist

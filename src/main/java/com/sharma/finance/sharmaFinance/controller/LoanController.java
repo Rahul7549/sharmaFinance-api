@@ -4,12 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.sharma.finance.sharmaFinance.model.Loan;
 import com.sharma.finance.sharmaFinance.service.LoanService;
@@ -32,12 +27,12 @@ public class LoanController {
 	
 	
 	@PostMapping("/loan")
-	public ResponseEntity<?> createNewLoan(Loan newloan){
+	public ResponseEntity<?> createNewLoan(@RequestBody Loan newloan){
 		return loanService.createNewLoan(newloan);
 	}
 	
 	@PutMapping("/loan/{loanId}")
-	public ResponseEntity<?> updateLoan(@PathVariable Long loanId,Loan loan) {
+	public ResponseEntity<?> updateLoan(@PathVariable Long loanId,@RequestBody Loan loan) {
 		return loanService.updateLoan(loanId, loan);
 	}
 	
