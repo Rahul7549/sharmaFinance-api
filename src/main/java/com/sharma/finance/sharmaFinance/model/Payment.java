@@ -37,12 +37,12 @@ public class Payment {
 
     public Payment() {}
     
-    public Payment(int memberId, LocalDate paymentDate, BigDecimal amountPaid, BigDecimal fine) {
-        this.paymentId = memberId;
-        this.paymentDate = paymentDate;
-        this.amountPaid = amountPaid;
-        this.fine = fine;
-    }
+//    public Payment(int memberId, LocalDate paymentDate, BigDecimal amountPaid, BigDecimal fine) {
+//        this.paymentId = memberId;
+//        this.paymentDate = paymentDate;
+//        this.amountPaid = amountPaid;
+//        this.fine = fine;
+//    }
 
 	// Getters and Setters
     public int getPaymentId() {
@@ -53,13 +53,13 @@ public class Payment {
         this.paymentId = paymentId;
     }
 
-    public Member getMember() {
-        return member;
-    }
-
-    public void setMember(Member member) {
-        this.member = member;
-    }
+//    public Member getMember() {
+//        return member;
+//    }
+//
+//    public void setMember(Member member) {
+//        this.member = member;
+//    }
 
     public LocalDate getPaymentDate() {
         return paymentDate;

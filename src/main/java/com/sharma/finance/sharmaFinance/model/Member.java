@@ -46,6 +46,8 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Loan> loans;
     
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Payment> payments;
     
     public Member() {}
 
@@ -82,13 +84,13 @@ public class Member {
         this.contactInfo = contactInfo;
     }
 
-    public ResponsiblePerson getResponsiblePerson() {
-        return responsiblePerson;
-    }
-
-    public void setResponsiblePerson(ResponsiblePerson responsiblePerson) {
-        this.responsiblePerson = responsiblePerson;
-    }
+//    public ResponsiblePerson getResponsiblePerson() {
+//        return responsiblePerson;
+//    }
+//
+//    public void setResponsiblePerson(ResponsiblePerson responsiblePerson) {
+//        this.responsiblePerson = responsiblePerson;
+//    }
 
     public String getStatus() {
         return status;
@@ -123,6 +125,14 @@ public class Member {
 	public void setLoans(List<Loan> loans) {
 		this.loans = loans;
 	}
+	
+	public List<Payment> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(List<Payment> payments) {
+		this.payments = payments;
+	}
 
 	@PrePersist
     protected void onCreate() {
@@ -139,8 +149,12 @@ public class Member {
 	public String toString() {
 		return "Member [memberId=" + memberId + ", name=" + name + ", contactInfo=" + contactInfo
 				+ ", responsiblePerson=" + responsiblePerson + ", status=" + status + ", createdOn=" + createdOn
-				+ ", updatedOn=" + updatedOn + ", loans=" + loans + "]";
+				+ ", updatedOn=" + updatedOn + ", loans=" + loans + ", payments=" + payments + "]";
 	}
+
+    
+    
+	
     
 
 	
