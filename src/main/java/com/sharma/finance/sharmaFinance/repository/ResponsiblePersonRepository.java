@@ -7,6 +7,6 @@ import com.sharma.finance.sharmaFinance.model.ResponsiblePerson;
 
 
 @Repository
-public interface ResponsiblePersonRepository extends JpaRepository<ResponsiblePerson,Integer>{
+public interface ResponsiblePersonRepository extends JpaRepository<ResponsiblePerson,Long>{
 
 }

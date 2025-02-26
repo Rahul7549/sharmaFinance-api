@@ -91,6 +91,17 @@ public class ResponsiblePerson {
 //		this.members = members;
 //	}
 
+    @PrePersist
+    protected void onCreate() {
+        this.createdOn = LocalDateTime.now();
+        this.updatedOn = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedOn = LocalDateTime.now();
+    }
+
 	@Override
 	public String toString() {
 		return "ResponsiblePerson [responsibleId=" + responsibleId + ", name=" + name + ", contactInfo=" + contactInfo
