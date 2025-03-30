@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
 @Entity(name = "responsible_persons")
 public class ResponsiblePerson {
 
@@ -105,7 +104,7 @@ public class ResponsiblePerson {
 	@Override
 	public String toString() {
 		return "ResponsiblePerson [responsibleId=" + responsibleId + ", name=" + name + ", contactInfo=" + contactInfo
-				+ ", createdOn=" + createdOn + ", updatedOn=" + updatedOn + ", members=" + members + "]";
+				+ ", createdOn=" + createdOn + ", updatedOn=" + updatedOn + "]";
 	}
     
 }
