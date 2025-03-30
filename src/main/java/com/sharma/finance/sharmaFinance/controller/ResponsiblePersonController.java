@@ -36,7 +36,12 @@ public class ResponsiblePersonController {
 	public ResponseEntity<?> createResponsiblePerson( @RequestBody ResponsiblePerson person){
 		return responsiblePersonService.createResponsiblePerson(person);
 	}
-	
+	//create the responsible person
+//	{
+//		"responsibleId": 0,
+//			"name": "string",
+//			"contactInfo": "string 123"
+//	}
 	@PutMapping("/responsible-Persons/{personid}")
 	public ResponseEntity<?> updateResponsiblePersion(@PathVariable Long personid,  @RequestBody ResponsiblePerson person){
 		return responsiblePersonService.updateResponsiblePersion(personid, person);
