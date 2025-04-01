@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sharma.finance.sharmaFinance.model.ResponsiblePerson;
 import com.sharma.finance.sharmaFinance.service.ResponsiblePersonService;
 
+import io.swagger.v3.oas.models.responses.ApiResponse;
+
 @RestController
 public class ResponsiblePersonController {
 	
@@ -49,7 +51,8 @@ public class ResponsiblePersonController {
 	
 	@DeleteMapping("/responsible-Persons/{personId}")
 	public ResponseEntity<?> deleteResponsiblePersionById( @PathVariable Long personId){
-		return responsiblePersonService.deleteResponsiblePersionById(personId);
+		return responsiblePersonService.deleteResponsiblePersonById(personId);
+        
 	}
 	
 }

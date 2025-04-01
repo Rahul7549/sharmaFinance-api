@@ -1,7 +1,5 @@
 package com.sharma.finance.sharmaFinance.controller;
 
-
-
 import java.util.List;
 import java.util.Map;
 
@@ -25,8 +23,6 @@ import com.sharma.finance.sharmaFinance.service.LoanPaymentService;
 
 import jakarta.validation.Valid;
 
-
-
 @RestController("loanPayment")
 public class LoanPaymentController {
 
@@ -34,27 +30,25 @@ public class LoanPaymentController {
 
 	@Autowired
 	LoanPaymentService loanPaymentService;
-	
+
 	@GetMapping("/loan-payments")
-	public ResponseEntity<List<LoanPayment>> findAllLoan(){
+	public ResponseEntity<List<LoanPayment>> findAllLoan() {
 		return loanPaymentService.findAllLoanPayment();
 	}
-	
+
 	@GetMapping("/loan-payments/{paymentId}")
 	public ResponseEntity<LoanPayment> findLoanPaymentById(@PathVariable Long paymentId) {
-	    return loanPaymentService.findLoanPaymentById(paymentId);
+		return loanPaymentService.findLoanPaymentById(paymentId);
 	}
-	
+
 	@GetMapping("/all-loan-payments/{paymentId}")
-	public ResponseEntity<List<LoanPayment>> findAllLoanPaymentById(@PathVariable Long paymentId){
-	    return loanPaymentService.findAllLoanPaymentById(paymentId);
+	public ResponseEntity<?> findAllLoanPaymentById(@PathVariable Long paymentId) {
+		return loanPaymentService.findAllLoanPaymentById(paymentId);
 	}
-	
-	
+
 	@PostMapping("/loan-payments")
-	public ResponseEntity<?> createNewLoanPayment( 
-			@RequestBody LoanPayment newLoanPayment
-			/*, BindingResult result*/) {
+	public ResponseEntity<?> createNewLoanPayment(@RequestBody LoanPayment newLoanPayment
+	/* , BindingResult result */) {
 
 //	Map<String, String> validationErrors = loanPaymentService.validateLoanPayment(result);
 //
@@ -63,29 +57,25 @@ public class LoanPaymentController {
 //		return ResponseEntity.badRequest().body(validationErrors);
 //
 //	}
-	
-	try {
 
-		LoanPayment savedLoanPayment = loanPaymentService.saveLoanPayment(newLoanPayment);
-	
-		return ResponseEntity.status(HttpStatus.CREATED).body(savedLoanPayment);
-	
+		try {
+
+			LoanPayment savedLoanPayment = loanPaymentService.saveLoanPayment(newLoanPayment);
+
+			return ResponseEntity.status(HttpStatus.CREATED).body(savedLoanPayment);
+
 		} catch (Exception e) {
-	
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-	
-		.body(Map.of("error", "An unexpected error occurred while saving the loan payment."));
-	
+
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+
+					.body(Map.of("error", "An unexpected error occurred while saving the loan payment."));
+
 		}
 
 	}
-	
-	
+
 	@PutMapping("loan-payments/{paymentId}")
-    public ResponseEntity<?> updateLoanPayment(
-            @PathVariable Long paymentId,
-            @RequestBody LoanPayment request
-            ) {
+	public ResponseEntity<?> updateLoanPayment(@PathVariable Long paymentId, @RequestBody LoanPayment request) {
 
 //		Map<String, String> validationErrors = loanPaymentService.validateLoanPayment(result);
 //
@@ -96,26 +86,26 @@ public class LoanPaymentController {
 //		}
 //		
 		try {
-	        logger.info("Updating LoanPayment with ID: {}", paymentId);
-	        return loanPaymentService.updateLoanPayment(paymentId, request);
-		}
-		catch (Exception e) {
+			logger.info("Updating LoanPayment with ID: {}", paymentId);
+			return loanPaymentService.updateLoanPayment(paymentId, request);
+		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					
-					.body(Map.of("error", "An unexpected error occurred while saving the loan payment."));
-				
-		}
-        
-    }
-	
-	@DeleteMapping("loan-payments/{paymentId}")
-    public ResponseEntity<String> deleteLoanPayment(@PathVariable Long paymentId) {
-        logger.info("Request to delete LoanPayment with ID: {}", paymentId);
-        
-        loanPaymentService.deleteLoanPayment(paymentId);
 
-        return ResponseEntity.ok("LoanPayment deleted successfully");
-    }
-	
-	
+					.body(Map.of("error", "An unexpected error occurred while saving the loan payment."));
+
+		}
+
+	}
+
+	@DeleteMapping("loan-payments/{paymentId}")
+	public ResponseEntity<String> deleteLoanPayment(@PathVariable Long paymentId) {
+		logger.info("Request to delete LoanPayment with ID: {}", paymentId);
+
+		loanPaymentService.deleteLoanPayment(paymentId);
+
+		return ResponseEntity.ok("LoanPayment deleted successfully");
+	}
+
+
+
 }

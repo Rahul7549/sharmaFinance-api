@@ -64,34 +64,23 @@ public class LoanService {
     public ResponseEntity<List<Loan>> findAllLoanByEntityId(Long loanId){
     	List<Loan> loans= loanRepository.findAllById(Collections.singletonList(loanId));
     	if(loans.isEmpty()) {
-    		return ResponseEntity.notFound().build();
+    		return ResponseEntity.ok(Collections.emptyList());
     	}
     	return ResponseEntity.ok(loans);
     }
     
     
     public ResponseEntity<?> createNewLoan(Loan newLoan){
-    	try {
-    		
-//    		Member member = memberRepository.findById(newLoan.getMember().getMemberId())
-//    		        .orElseThrow(() -> new ResourceNotFoundException("Member not found with ID " + 					newLoan.getMember().getMemberId()));
-//    		
-//    		logger.info(member.toString());
-//    		//logger.info(member.);
-//    		newLoan.setMember(member);
-    		Loan  createdLoan=loanRepository.save(newLoan);
-    		return ResponseEntity.status(HttpStatus.CREATED).body(createdLoan);
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body(Map.of("error", "An unexpected error occurred while saving the loan payment."));
-		}
     	
+    	Loan  createdLoan=loanRepository.save(newLoan);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdLoan);
+	
     }
     
     
     @Transactional
     public ResponseEntity<?> updateLoan(Long loanId,Loan newLoan){
-    	try {
+    	
 			Loan existingLoan=loanRepository.findById(loanId)
 					.orElseThrow(()->new ResourceNotFoundException("Loan not found with ID:" + 					loanId));
 			
@@ -103,25 +92,19 @@ public class LoanService {
 			logger.info("Loan updated uuccessfully with ID" +loanId);
 			return ResponseEntity.ok(updatedLoan);
 			
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body(Map.of("error", "An unexpected error occurred while saving the loan payment."));
-		}
+		
     }
     
     @Transactional
     public ResponseEntity<?> deleteLoan(long loanId){
-    	try {
+    	
 			Loan existingLoan=loanRepository.findById(loanId)
 				.orElseThrow(()-> new ResourceNotFoundException("Loan not found with ID:" + 				loanId));
 			
 			loanRepository.delete(existingLoan);
 			logger.info("Loan deleted successfully with ID ",+loanId);
 			return ResponseEntity.ok("Loan deleted successfully");
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body(Map.of("error", "An unexpected error occurred while saving the loan payment."));
-		}
+		
     }
 	
 }
