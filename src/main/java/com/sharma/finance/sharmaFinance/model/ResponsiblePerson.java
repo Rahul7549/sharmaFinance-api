@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-@Entity(name = "responsible_persons")
+@Entity(name = "admins")
 public class ResponsiblePerson {
 
     @Id

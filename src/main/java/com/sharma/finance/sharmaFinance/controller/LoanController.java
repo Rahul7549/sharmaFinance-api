@@ -15,29 +15,29 @@ public class LoanController {
 	@Autowired
 	LoanService loanService;
 	
-	@GetMapping("/loan")
+	@GetMapping("/loans")
 	public ResponseEntity<?> findAllLoan(){
 		return loanService.findAllLoan();
 	}
 	
-	@GetMapping("/loan/{loanId}")
+	@GetMapping("/loans/{loanId}")
 	public ResponseEntity<Loan> findLoanByEntityId(@PathVariable Long loanId){
 		return loanService.findLoanById(loanId);
 	}
 	
 	
-	@PostMapping("/loan")
+	@PostMapping("/loans")
 	public ResponseEntity<?> createNewLoan(@RequestBody Loan newloan){
 		return loanService.createNewLoan(newloan);
 	}
 	
-	@PutMapping("/loan/{loanId}")
+	@PutMapping("/loans/{loanId}")
 	public ResponseEntity<?> updateLoan(@PathVariable Long loanId,@RequestBody Loan loan) {
 		return loanService.updateLoan(loanId, loan);
 	}
 	
 	
-	@DeleteMapping("lone/{loanId}")
+	@DeleteMapping("loans/{loanId}")
 	public ResponseEntity<?> deleteLoan(@PathVariable Long loanId){
 		return loanService.deleteLoan(loanId);
 	}
